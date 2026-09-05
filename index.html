@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tipometer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="description" content="A one-screen tip calculator. Dial the percentage, enter the bill, get the tip.">
+<meta name="theme-color" content="#0e1216">
+<meta name="color-scheme" content="dark">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Tipometer">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="app">
+  <header class="masthead">
+    <h1>Tipometer</h1>
+  </header>
+
+  <section class="dial" aria-labelledby="tip-rate-label">
+    <h2 id="tip-rate-label" class="label">Tip rate</h2>
+    <div class="dial-row">
+      <button type="button" class="step" id="decrement" aria-label="Decrease tip by 0.5 percent">
+        <span aria-hidden="true">&minus;</span>
+      </button>
+
+      <output class="rate" id="rate" for="decrement increment" aria-live="polite">
+        <span class="rate-value" id="rate-value">15</span><span class="rate-unit">%</span>
+      </output>
+
+      <button type="button" class="step" id="increment" aria-label="Increase tip by 0.5 percent">
+        <span aria-hidden="true">+</span>
+      </button>
+    </div>
+    <p class="hint" id="hint">Hold to change quickly</p>
+  </section>
+
+  <section class="entry">
+    <label class="label" for="bill">Bill total</label>
+    <div class="field">
+      <span class="currency" id="currency" aria-hidden="true">$</span>
+      <input id="bill" type="text" inputmode="decimal" autocomplete="off"
+             enterkeyhint="done" placeholder="0.00" aria-describedby="hint">
+      <button type="button" class="clear" id="clear" aria-label="Clear bill total" hidden>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="totals" aria-live="polite">
+    <div class="line">
+      <span class="line-label">Tip</span>
+      <span class="line-value tip" id="tip-amount">$0.00</span>
+    </div>
+    <div class="line grand">
+      <span class="line-label">Total with tip</span>
+      <span class="line-value" id="grand-total">$0.00</span>
+    </div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
