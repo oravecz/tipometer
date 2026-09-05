@@ -1,0 +1,238 @@
+:root {
+  --bg: #0e1216;
+  --surface: #161c22;
+  --surface-2: #1e262e;
+  --line: #263039;
+  --text: #eef3f7;
+  --muted: #8a99a6;
+  --accent: #34d399;
+  --accent-press: #2bb887;
+  --radius: 18px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 400 16px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+.app {
+  min-height: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: calc(env(safe-area-inset-top) + 20px)
+           calc(env(safe-area-inset-right) + 20px)
+           calc(env(safe-area-inset-bottom) + 24px)
+           calc(env(safe-area-inset-left) + 20px);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.masthead h1 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.label {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---- tip dial ---- */
+
+.dial {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 18px 14px;
+  text-align: center;
+}
+
+.dial .label { text-align: left; }
+
+.dial-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.step {
+  flex: 0 0 auto;
+  width: 68px;
+  height: 68px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 34px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: transform 90ms ease, background-color 90ms ease;
+}
+
+.step:active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #06251a;
+  transform: scale(0.94);
+}
+
+.step:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.step:focus-visible,
+input:focus-visible,
+.clear:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.rate {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  min-width: 0;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.rate-value {
+  font-size: clamp(56px, 19vw, 84px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.rate-unit {
+  font-size: clamp(24px, 8vw, 34px);
+  font-weight: 600;
+  margin-left: 2px;
+}
+
+.hint {
+  margin: 12px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ---- bill entry ---- */
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+
+.field:focus-within { border-color: var(--accent); }
+
+.currency {
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+#bill {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+  padding: 0;
+}
+
+#bill::placeholder { color: #495764; }
+#bill:focus { outline: none; }
+
+.clear {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+/* ---- totals ---- */
+
+.totals {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 4px 18px;
+}
+
+.line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0;
+}
+
+.line + .line { border-top: 1px solid var(--line); }
+
+.line-label {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.line-value {
+  font-size: 26px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.line-value.tip { color: var(--accent); }
+
+.grand .line-value { font-size: 22px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .step { transition: none; }
+}
